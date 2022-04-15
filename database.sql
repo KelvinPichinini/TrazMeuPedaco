@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS traz_meu_pedaco
-CREATE TABLE traz_meu_pedaco
+DROP DATABASE IF EXISTS traz_meu_pedaco;
+CREATE DATABASE traz_meu_pedaco;
 
-USE traz_meu_pedaco
+USE traz_meu_pedaco;
 
 CREATE TABLE customer (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -18,19 +18,20 @@ CREATE TABLE products (
     name VARCHAR(120) NOT NULL,
     price DECIMAL(6,2) NOT NULL,
     available BOOLEAN NOT NULL,
-    description VARCHAR(200) NOT NULL UNIQUE,
+    description VARCHAR(200) NOT NULL UNIQUE
 );
 
 CREATE TABLE orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT NOT NULL FOREIGN KEY REFERENCES customer(customer_id),
+    customer_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE orders_products (
     order_product_id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL FOREIGN KEY REFERENCES orders(order_id),
-    product_id INT NOT NULL FOREIGN KEY REFERENCES products(product_id),
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
     quantity INT NOT NULL,
-
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
