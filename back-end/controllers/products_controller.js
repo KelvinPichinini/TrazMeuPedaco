@@ -8,22 +8,46 @@ const getAll = async (_req, res) => {
 const add = async (req, res) => {
     const newProduct = req.body;
     const result = await Products.add(newProduct)
-    res.status(201).json(result);
+    return res.status(201).json({id: result});
 }
 
 const getById = async (req, res) => {
     const { id } = req.params;
     const result = await Products.getById(id)
     if (result) {
-        res.status(200).json(result);
+        return res.status(200).json(result);
     }
     else {
-        res.status(404).json({message: 'Product not found'})
+        return res.status(404).json({message: 'Product not found'})
+    }
+}
+
+const edit = async (req, res) => {
+    const { id } = req.params;
+    const newData = req.body;
+    const result = await Products.edit(id, newData);
+    if (result) {
+        return res.status(200).json({message: 'Successfully updated'});
+    }
+    else {
+        return res.status(404).json({message: 'Product not found'})
+    }
+}
+
+const remove = async (req, res) => {
+    const { id } = req.params;
+    const result = await Products.remove(id);
+    if (result) {
+        return res.status(200).json({message: 'Successfully deleted'});
+    } else {
+        return res.status(404).json({message: 'Product not found'})
     }
 }
 
 module.exports = {
     getAll,
     add,
-    getById
+    getById,
+    edit,
+    remove
 }
