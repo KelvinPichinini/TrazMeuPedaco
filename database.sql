@@ -18,7 +18,7 @@ CREATE TABLE products (
     name VARCHAR(120) NOT NULL,
     price DECIMAL(6,2) NOT NULL,
     available BOOLEAN NOT NULL,
-    description VARCHAR(200) NOT NULL UNIQUE
+    description VARCHAR(200) NOT NULL
 );
 
 CREATE TABLE orders (
