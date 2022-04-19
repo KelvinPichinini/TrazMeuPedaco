@@ -3,7 +3,7 @@ CREATE DATABASE traz_meu_pedaco;
 
 USE traz_meu_pedaco;
 
-CREATE TABLE customer (
+CREATE TABLE customers (
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(120) NOT NULL,
     cpf VARCHAR(11) NOT NULL UNIQUE,
@@ -34,7 +34,8 @@ CREATE TABLE products (
 CREATE TABLE orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
 CREATE TABLE orders_products (
